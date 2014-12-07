@@ -3,11 +3,19 @@
 this.App = (function() {
 
   function App() {
+    window.scrollTo(0, 1);
+    this.bindEvents();
     this.startTime();
   }
 
+  App.prototype.bindEvents = function() {
+    return $('#clock').on('click', function(e) {
+      return this.stop();
+    });
+  };
+
   App.prototype.startTime = function() {
-    var h, m, pill, s, t, today,
+    var h, m, pillText, s, t, today,
       _this = this;
     today = new Date();
     h = today.getHours();
@@ -15,30 +23,40 @@ this.App = (function() {
     s = today.getSeconds();
     m = this.checkTime(m);
     s = this.checkTime(s);
-    document.getElementById("clock").innerHTML = h + ":" + m + ":" + s;
-    pill = "???";
+    $("#clock").text(h + ":" + m + ":" + s);
+    pillText = "???";
     if (s >= 0 && s <= 5) {
-      pill = "jejum";
-      $("#pill").addClass("jejum").removeClass("manha").removeClass("almoco").removeClass("noite");
-      this.play();
-    } else if (s >= 15 && s <= 20) {
-      pill = "9 da manhã";
-      $("#pill").removeClass("jejum").addClass("manha").removeClass("almoco").removeClass("noite");
-      this.play();
+      pillText = "jejum";
+      $('.pill').hide();
+      $("#jejum").show();
+      this.play('jejum');
+    } else if (s >= 10 && s <= 15) {
+      pillText = "9 da manhã";
+      $('.pill').hide();
+      $("#manha").show();
+      this.play('manha');
+    } else if (s >= 20 && s <= 25) {
+      pillText = "almoço";
+      $('.pill').hide();
+      $("#almoco").show();
+      this.play('almoco');
     } else if (s >= 30 && s <= 35) {
-      pill = "almoço";
-      $("#pill").removeClass("jejum").removeClass("manha").addClass("almoco").removeClass("noite");
-      this.play();
-    } else if (s >= 45 && s <= 50) {
-      pill = "9 da noite";
-      $("#pill").removeClass("jejum").removeClass("manha").removeClass("almoco").addClass("noite");
-      this.play();
+      pillText = "4 da tarde";
+      $('.pill').hide();
+      $("#tarde").show();
+      this.play('tarde');
+    } else if (s >= 40 && s <= 45) {
+      pillText = "9 da noite";
+      $('.pill').hide();
+      $("#noite").show();
+      this.play('noite');
     } else {
-      pill = "";
-      $("#pill").removeClass("jejum").removeClass("manha").removeClass("almoco").removeClass("noite");
-      stop();
+      $('.pill').hide();
+      $("#no-pill").show();
+      pillText = "no pill";
+      this.stop();
     }
-    document.getElementById("pill").innerHTML = pill;
+    $(".pill .pill-text").text(pillText);
     t = setTimeout(function() {
       _this.startTime();
     }, 500);
@@ -51,16 +69,26 @@ this.App = (function() {
     return i;
   };
 
-  App.prototype.play = function() {
+  App.prototype.play = function(file) {
     /**
     For this to work on chrome for android, first this flag must be disabled:
     chrome://flags/#disable-gesture-requirement-for-media-playback
     */
 
+    var media;
+    media = $("." + file + "-mp3")[0];
+    if (media.paused) {
+      media.load();
+      return media.play();
+    }
   };
 
   App.prototype.stop = function() {
-    $("#alarm-mp3")[0].pause();
+    $(".media").each(function(index) {
+      if (!this.paused) {
+        return this.pause();
+      }
+    });
   };
 
   return App;

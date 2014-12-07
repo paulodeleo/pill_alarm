@@ -1,6 +1,17 @@
 class @App
   constructor: ->
+    # fake fullscreen by hiding the address bar?
+    window.scrollTo(0,1)
+    # window.document.body.requestFullscreen()
+    # window.document.documentElement.requestFullscreen()
+
+    @bindEvents()
+
     @startTime()
+
+  bindEvents: ->
+    $('#clock').on 'click', (e) ->
+      @stop()
 
   startTime: ->
     today = new Date()
@@ -9,29 +20,42 @@ class @App
     s = today.getSeconds()
     m = @checkTime(m)
     s = @checkTime(s)
-    document.getElementById("clock").innerHTML = h + ":" + m + ":" + s
-    pill = "???"
+    $("#clock").text(h + ":" + m + ":" + s)
+
+    pillText = "???"
     if s >= 0 and s <= 5
-      pill = "jejum"
-      $("#pill").addClass("jejum").removeClass("manha").removeClass("almoco").removeClass "noite"
-      @play()
-    else if s >= 15 and s <= 20
-      pill = "9 da manhã"
-      $("#pill").removeClass("jejum").addClass("manha").removeClass("almoco").removeClass "noite"
-      @play()
+      pillText = "jejum"
+      $('.pill').hide()
+      $("#jejum").show()
+      @play('jejum')
+    else if s >= 10 and s <= 15
+      pillText = "9 da manhã"
+      $('.pill').hide()
+      $("#manha").show()
+      @play('manha')
+    else if s >= 20 and s <= 25
+      pillText = "almoço"
+      $('.pill').hide()
+      $("#almoco").show()
+      @play('almoco')
     else if s >= 30 and s <= 35
-      pill = "almoço"
-      $("#pill").removeClass("jejum").removeClass("manha").addClass("almoco").removeClass "noite"
-      @play()
-    else if s >= 45 and s <= 50
-      pill = "9 da noite"
-      $("#pill").removeClass("jejum").removeClass("manha").removeClass("almoco").addClass "noite"
-      @play()
+      pillText = "4 da tarde"
+      $('.pill').hide()
+      $("#tarde").show()
+      @play('tarde')
+    else if s >= 40 and s <= 45
+      pillText = "9 da noite"
+      $('.pill').hide()
+      $("#noite").show()
+      @play('noite')
     else
-      pill = ""
-      $("#pill").removeClass("jejum").removeClass("manha").removeClass("almoco").removeClass "noite"
-      stop()
-    document.getElementById("pill").innerHTML = pill
+      $('.pill').hide()
+      $("#no-pill").show()
+      pillText = "no pill"
+      @stop()
+
+    $(".pill .pill-text").text(pillText)
+
     t = setTimeout(=>
       @startTime()
       return
@@ -42,14 +66,20 @@ class @App
     i = "0" + i  if i < 10 # add zero in front of numbers < 10
     i
 
-  play: ->
+  play: (file) ->
 
     ###*
     For this to work on chrome for android, first this flag must be disabled:
     chrome://flags/#disable-gesture-requirement-for-media-playback
     ###
-    # $('#alarm-mp3')[0].play()
+    media = $(".#{file}-mp3")[0]
+    if media.paused
+      media.load()
+      media.play()
 
   stop: ->
-    $("#alarm-mp3")[0].pause()
+    # $(".media")[0].pause()
+    $(".media").each (index) ->
+      if !this.paused
+        this.pause()
     return

@@ -1,14 +1,42 @@
 <meta charset='utf-8'>
+<meta name="mobile-web-app-capable" content="yes">
 <html>
 <head>
   <title>Pill Alarm App</title>
   <link href="app.css" rel="stylesheet" />
 </head>
-<body>
+<body class="sized">
 
-  <div id="clock" onclick="document.getElementById('alarm-mp3').play();">00:00</div>
-  <div id="pill"></div>
-  <video src="ALARM.mp3" id="alarm-mp3" style="display: block"></video>
+  <div id="clock" class="centered sized" onclick="document.getElementById('alarm-mp3').play();">00:00</div>
+  <div id="no-pill" class="centered sized pill"></div>
+  <div id="jejum" class="centered sized pill">
+    <div class="pill-text"></div>
+    <img src="media/pills.jpg" class="pills-image">
+    <img src="media/jejum_pills.jpg" class="pills-image">
+  </div>
+  <div id="manha" class="centered sized pill">
+    <div class="pill-text"></div>
+    <img src="media/pills.jpg" class="pills-image">
+    <img src="media/alenia.jpg" class="alenia-image">
+  </div>
+  <div id="almoco" class="centered sized pill">
+    <div class="pill-text"></div>
+    <img src="media/pills.jpg" class="pills-image">
+  </div>
+  <div id="tarde" class="centered sized pill">
+    <div class="pill-text"></div>
+    <img src="media/pills.jpg" class="pills-image">
+  </div>
+  <div id="noite" class="centered sized pill">
+    <div class="pill-text"></div>
+    <img src="media/pills.jpg" class="pills-image">
+    <img src="media/alenia.jpg" class="alenia-image">
+  </div>
+  <video src="media/jejum.mp3" class="jejum-mp3 media" style="display: block"></video>
+  <video src="media/manha.mp3" class="manha-mp3 media" style="display: block"></video>
+  <video src="media/almoco.mp3" class="almoco-mp3 media" style="display: block"></video>
+  <video src="media/tarde.mp3" class="tarde-mp3 media" style="display: block"></video>
+  <video src="media/noite.mp3" class="noite-mp3 media" style="display: block"></video>
 
 </body>
 

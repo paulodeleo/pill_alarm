@@ -1,27 +1,70 @@
+body {
+  margin: 0;
+  background-color: grey;
+  color: white;
+}
+
+.centered {
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.sized {
+  width: 800px;
+  height: 480px;
+}
+
 #clock {
+  height: 50px;
+  font-size: 50px;
+  width: 400px;
+  background-color: black;
+  color: white;
+}
+
+.pill {
   font-size: 50px;
   width: 400px;
 }
 
-#pill {
-  font-size: 50px;
-  width: 400px;
+.pills-image {
+  width: 200px;
 }
 
-.jejum {
-  background-color: green;
+.alenia-image {
+  width: 200px;
 }
 
-.manha {
+#no-pill {
+  background-color: black;
+  color: black;
+}
+
+#jejum {
+  background-color: blue;
+  color: white;
+}
+
+#manha {
+  background-color: lightgreen;
+  color: black;
+}
+
+#almoco {
   background-color: yellow;
+  color: black;
 }
 
-.almoco {
+#tarde {
   background-color: red;
+  color: black;
 }
 
-.noite {
-  background-color: lightblue;
+#noite {
+  background-color: white;
+  color: black;
 }
 
 .no-alarm {
