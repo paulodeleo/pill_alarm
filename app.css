@@ -1,0 +1,29 @@
+#clock {
+  font-size: 50px;
+  width: 400px;
+}
+
+#pill {
+  font-size: 50px;
+  width: 400px;
+}
+
+.jejum {
+  background-color: green;
+}
+
+.manha {
+  background-color: yellow;
+}
+
+.almoco {
+  background-color: red;
+}
+
+.noite {
+  background-color: lightblue;
+}
+
+.no-alarm {
+  background-color: white;
+}
