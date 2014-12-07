@@ -1,0 +1,103 @@
+<meta charset='utf-8'>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    #clock {
+      font-size: 50px;
+      width: 400px;
+    }
+
+    #pill {
+      font-size: 50px;
+      width: 400px;
+    }
+
+    .jejum {
+      background-color: green;
+    }
+
+    .manha {
+      background-color: yellow;
+    }
+
+    .almoco {
+      background-color: red;
+    }
+
+    .noite {
+      background-color: lightblue;
+    }
+
+    .no-alarm {
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="clock" onclick="document.getElementById('alarm-mp3').play();">00:00</div>
+  <div id="pill"></div>
+  <video src="ALARM.mp3" id="alarm-mp3" style="display: block"></video>
+
+</body>
+
+<script src="jquery-2.1.1.min.js"></script>
+<script>
+function startTime() {
+    var today=new Date();
+    var h=today.getHours();
+    var m=today.getMinutes();
+    var s=today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+
+    document.getElementById('clock').innerHTML = h+":"+m+":"+s;
+
+    var pill = '???';
+    if (s >= 0 && s <= 5) {
+      pill = 'jejum';
+      $('#pill').addClass('jejum').removeClass('manha').removeClass('almoco').removeClass('noite');
+      play();
+    } else if (s >= 15 && s <= 20) {
+      pill = '9 da manhã';
+      $('#pill').removeClass('jejum').addClass('manha').removeClass('almoco').removeClass('noite');
+      play();
+    } else if (s >= 30 && s <= 35) {
+      pill = 'almoço';
+      $('#pill').removeClass('jejum').removeClass('manha').addClass('almoco').removeClass('noite');
+      play();
+    } else if (s >= 45 && s <= 50) {
+      pill = '9 da noite';
+      $('#pill').removeClass('jejum').removeClass('manha').removeClass('almoco').addClass('noite');
+      play();
+    } else {
+      pill = '';
+      $('#pill').removeClass('jejum').removeClass('manha').removeClass('almoco').removeClass('noite');
+      stop();
+    }
+    document.getElementById('pill').innerHTML = pill;
+
+    var t = setTimeout(function(){startTime()},500);
+}
+
+function checkTime(i) {
+    if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
+function play() {
+  /** For this to work on chrome for android, first this flag must be disabled:
+  chrome://flags/#disable-gesture-requirement-for-media-playback
+  **/
+  document.getElementById('alarm-mp3').play();
+}
+
+function stop() {
+  document.getElementById('alarm-mp3').pause();
+}
+
+startTime();
+</script>
+
+</html>
