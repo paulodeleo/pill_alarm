@@ -1,3 +1,6 @@
+# To compile .coffee files into .js files:
+  `coffe -cwb .`  
+
 # To generate mp3 files:
 
 ### jejum.mp3:
