@@ -10,7 +10,7 @@ class @App
     @startTime()
 
   bindEvents: ->
-    $('#clock').on 'click', (e) ->
+    $('#clock').on 'click', (e) =>
       @stop()
 
   startTime: ->
@@ -23,27 +23,33 @@ class @App
     $("#clock").text(h + ":" + m + ":" + s)
 
     pillText = "???"
-    if s >= 0 and s <= 5
+    # if s >= 0 and s <= 5
+    if h == 8 and m == 0
       pillText = "jejum"
       $('.pill').hide()
       $("#jejum").show()
       @play('jejum')
-    else if s >= 10 and s <= 15
+    # else if s >= 10 and s <= 15
+    else if h == 8 and m == 0
       pillText = "9 da manhã"
       $('.pill').hide()
       $("#manha").show()
       @play('manha')
-    else if s >= 20 and s <= 25
+    # else if s >= 20 and s <= 25
+    else if h == 13 and m == 0
       pillText = "almoço"
       $('.pill').hide()
       $("#almoco").show()
       @play('almoco')
-    else if s >= 30 and s <= 35
+    # else if s >= 30 and s <= 35
+    else if h == 16 and m == 0
       pillText = "4 da tarde"
       $('.pill').hide()
       $("#tarde").show()
       @play('tarde')
-    else if s >= 40 and s <= 45
+    # else if s >= 40 and s <= 45
+    else if h == 21 and s == 0
+    # else if h == 22 and m == 20
       pillText = "9 da noite"
       $('.pill').hide()
       $("#noite").show()
@@ -75,6 +81,7 @@ class @App
     media = $(".#{file}-mp3")[0]
     if media.paused
       media.load()
+      media.loop = true
       media.play()
 
   stop: ->

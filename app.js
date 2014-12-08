@@ -9,8 +9,9 @@ this.App = (function() {
   }
 
   App.prototype.bindEvents = function() {
+    var _this = this;
     return $('#clock').on('click', function(e) {
-      return this.stop();
+      return _this.stop();
     });
   };
 
@@ -25,27 +26,27 @@ this.App = (function() {
     s = this.checkTime(s);
     $("#clock").text(h + ":" + m + ":" + s);
     pillText = "???";
-    if (s >= 0 && s <= 5) {
+    if (h === 8 && m === 0) {
       pillText = "jejum";
       $('.pill').hide();
       $("#jejum").show();
       this.play('jejum');
-    } else if (s >= 10 && s <= 15) {
+    } else if (h === 8 && m === 0) {
       pillText = "9 da manhã";
       $('.pill').hide();
       $("#manha").show();
       this.play('manha');
-    } else if (s >= 20 && s <= 25) {
+    } else if (h === 13 && m === 0) {
       pillText = "almoço";
       $('.pill').hide();
       $("#almoco").show();
       this.play('almoco');
-    } else if (s >= 30 && s <= 35) {
+    } else if (h === 16 && m === 0) {
       pillText = "4 da tarde";
       $('.pill').hide();
       $("#tarde").show();
       this.play('tarde');
-    } else if (s >= 40 && s <= 45) {
+    } else if (h === 21 && s === 0) {
       pillText = "9 da noite";
       $('.pill').hide();
       $("#noite").show();
@@ -79,6 +80,7 @@ this.App = (function() {
     media = $("." + file + "-mp3")[0];
     if (media.paused) {
       media.load();
+      media.loop = true;
       return media.play();
     }
   };
