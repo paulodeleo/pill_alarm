@@ -24,7 +24,8 @@ class @App
 
     pillText = "???"
     # if s >= 0 and s <= 5
-    if h == 8 and m == 0
+    # if h == 8 and m == 0
+    if h == 22 and m == 27
       pillText = "jejum"
       $('.pill').hide()
       $("#jejum").show()

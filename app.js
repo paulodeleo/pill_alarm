@@ -26,7 +26,7 @@ this.App = (function() {
     s = this.checkTime(s);
     $("#clock").text(h + ":" + m + ":" + s);
     pillText = "???";
-    if (h === 8 && m === 0) {
+    if (h === 22 && m === 27) {
       pillText = "jejum";
       $('.pill').hide();
       $("#jejum").show();
