@@ -7,7 +7,7 @@ Each alarm displays the right pills to be taken, along with a unique color backg
 
 Recorded demo:
 
-  <iframe title="YouTube video player" width="480" height="390" src="https://www.youtube.com/watch?v=sb1Q4RrGAXU" frameborder="0" allowfullscreen></iframe>
+  https://www.youtube.com/watch?v=sb1Q4RrGAXU
 
 It's all hardcoded and badly coded by now, but can be easily customized.  
 
